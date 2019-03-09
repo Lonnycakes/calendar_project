@@ -1,6 +1,8 @@
 from utils import days_per_month
 from utils import month_order
 from utils import days_of_the_week
+from pprint import pprint
+
 
 def leap_year_check(year):
     if year % 4 == 0:
@@ -26,7 +28,7 @@ def create_calendar_month(month, first_day):
         key = "{} {}, {}".format(abb, day, day_of_week)
         index += 1
         month_dict.setdefault(key, [])
-    print(month_dict)
+#     print(month_dict)
     return month_dict
 
 JAN = create_calendar_month("January", "Tuesday")
@@ -69,4 +71,38 @@ def create_calendar_year(year, first_day):
     return calendar_year
         
 y2019 = create_calendar_year(2019, "Tuesday")
-print(y2019)
+
+# for year in y2019:
+#     print(year, "\n")
+
+def parse_month(month):
+    if len(month) < 3:
+        month_index = int(month) - 1
+    else:
+        for full_name in month_order:
+            if full_name.lower().startswith(month.lower()):
+                month_index = month_order.index(full_name)
+    return month_index
+
+assert parse_month("May") == 4
+assert parse_month("Dec") == 11
+assert parse_month("December") == 11
+assert parse_month("12") == 11
+if DEBUG:
+    print("Parse Month Check Passed!")
+  
+def add_task(year, time = None):
+    task = input("Enter task: ") 
+    month = input("Enter month: ")
+    month = parse_month(month)
+    date = input("Enter date: ")
+    time = input ("Enter time: ")
+    task = time + ": " + task
+    
+    for day, day_list in year[month].items():
+        key = day[4:].split(",") # Example: Dec 4, 2019  ["4"," 2019"]
+        if key[0] == date:
+            day_list.append(task)
+            
+# add_task(y2019)
+# print(y2019)
