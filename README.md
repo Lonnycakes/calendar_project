@@ -9,9 +9,9 @@ Functions We Need
 
 [x] 3. Create a function to add tasks to certain days.
 
-[ ] 4. Create a user interface handled through main.py.
+[x] 4. Create a user interface handled through main.py.
 
-[ ] 5. Add functionality to show tasks.
+[x] 5. Add functionality to show tasks.
 
 
 Give me December.
